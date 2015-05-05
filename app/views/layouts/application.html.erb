@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> | gPic: Explore the world through photos</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <style type="text/css">
+    html, body, #page-content, #map-canvas { height: 100%; }
+    header { background-color: yellow; }
+  </style>
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=<GOOGLE_MAPS_API_KEY>">
+  </script>
+  <script type="text/javascript">
+    function initialize() {
+      var mapOptions = {
+        center: { lat: -34.397, lng: 150.644},
+        zoom: 8
+      };
+      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+</head>
+
+<body>
+  <header class="navbar navbar-fixed-top">
+    <div class="container">
+      <%= link_to "gPic", '#', id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Sign in with Instagram", '#' %></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="container" id="page-content">
+    <%= yield %>
+  </div>
+</body>
+</html>
