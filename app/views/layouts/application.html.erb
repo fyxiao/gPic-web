@@ -11,7 +11,7 @@
     header { background-color: yellow; }
   </style>
   <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=<GOOGLE_MAPS_API_KEY>">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUGG0dtM041n8FMuh4Lzxh_ZIA-qVeqt4">
   </script>
   <script type="text/javascript">
     function initialize() {
@@ -28,10 +28,10 @@
 <body>
   <header class="navbar navbar-fixed-top">
     <div class="container">
-      <%= link_to "gPic", '#', id: "logo" %>
+      <%= link_to "gPic", 'http://127.0.0.1:3000', id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Sign in with Instagram", '#' %></li>
+          <li><%= link_to "Sign in with Instagram", Instagram.authorize_url(:redirect_uri => 'http://127.0.0.1:3000/loggedin') %></li>
         </ul>
       </nav>
     </div>
