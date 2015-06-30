@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= yield(:title) %> | gPic: Explore the world through photos</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title><%= yield(:title) %> | gPic: Explore the world through photos</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-  <style type="text/css">
-    html, body, #page-content, #map-canvas { height: 100%; }
-    header { background-color: yellow; }
-  </style>
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUGG0dtM041n8FMuh4Lzxh_ZIA-qVeqt4">
-  </script>
-  <script type="text/javascript">
-    function initialize() {
-      var mapOptions = {
-        center: { lat: 40.3487, lng: -74.6593},
-        zoom: 17 
-      };
-      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-      google.maps.event.addListener(map, 'click', function(event) {
-        marker = new google.maps.Marker({position: event.latLng, map: map})
-        window.name = "MapWindow"
-        window.open("http://127.0.0.1:3000/search?lat=" + event.latLng.lat() + "&lng=" + event.latLng.lng(), "MapWindow", [])
-      });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
-</head>
+    <style type="text/css">
+      html, body, #page-content, #map-canvas { height: 100%; }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUGG0dtM041n8FMuh4Lzxh_ZIA-qVeqt4">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: 40.3487, lng: -74.6593},
+          zoom: 17 
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        google.maps.event.addListener(map, 'click', function(event) {
+          marker = new google.maps.Marker({position: event.latLng, map: map})
+          window.name = "MapWindow"
+          window.open("http://127.0.0.1:3000/search?lat=" + event.latLng.lat() + "&lng=" + event.latLng.lng(), "MapWindow", [])
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
 
-<body>
-  <header class="navbar navbar-fixed-top">
-    <div class="container">
-      <%= link_to "gPic", 'http://127.0.0.1:3000', id: "logo" %>
+  <body>
+    <%= render 'layouts/header' %>
+    <div "container" id="page-content">
+      <%= yield %>
+      <%= debug(params) %>
     </div>
-  </header>
-  <div class="container" id="page-content">
-    <%= yield %>
-  </div>
-</body>
+  </body>
 </html>
