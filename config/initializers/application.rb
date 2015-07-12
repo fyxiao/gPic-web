@@ -8,6 +8,8 @@
 
 require "instagram"
 
+# These values are just for the development. Use new values when deploying elsewhere.
+
 HOME_PAGE_URL = "http://127.0.0.1:3000"
 
 Instagram.configure do |config|

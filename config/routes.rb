@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'map#show'
-  get 'loggedin', to: 'users#loggedin'
   get 'search', to: 'map#search'
-  #resources :map, :path => ''
+  
   resources :users
+  get 'loggedin' => 'users#loggedin'
+  
+  get 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 end

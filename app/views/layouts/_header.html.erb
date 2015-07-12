@@ -2,9 +2,13 @@
   <div class="container">
     <nav>
       <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "Log In", Instagram.authorize_url(:redirect_uri => 'http://127.0.0.1:3000/loggedin') %></li>
-      <li><%= link_to "Sign Up", Instagram.authorize_url(:redirect_uri => 'http://127.0.0.1:3000/loggedin') %></li>
-      <li><%= image_tag "profile_picture.jpg", :style => "max-height: 45px" %></li>
+        <% if logged_in? %>
+          <li><%= image_tag "profile_picture.jpg", :style => "max-height: 45px" %></li>
+          <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
+        <% else %>
+          <li><%= link_to "Log In", Instagram.authorize_url(:redirect_uri => HOME_PAGE_URL + '/login') %></li>
+          <li><%= link_to "Sign Up", Instagram.authorize_url(:redirect_uri => HOME_PAGE_URL + '/login') %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
